@@ -4,7 +4,9 @@ Esse é um projeto voltado para cadastro de alunos, professores, cursos e as res
 
 ### Clonando esse repositório
 
+```
 git clone https://github.com/rodolfoguner/faitec_2021_gestao_escolar.git
+```
 
 ### Instalando o projeto
 
