@@ -35,6 +35,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         mnRelatorio = new javax.swing.JMenu();
         mniRelatorioAluno = new javax.swing.JMenuItem();
+        mniRelatorioProfessor = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
 
@@ -91,6 +92,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
         mnRelatorio.add(mniRelatorioAluno);
+
+        mniRelatorioProfessor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.ALT_MASK));
+        mniRelatorioProfessor.setText("Relatorio professor");
+        mniRelatorioProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRelatorioProfessorActionPerformed(evt);
+            }
+        });
+        mnRelatorio.add(mniRelatorioProfessor);
 
         mnbPrincipal.add(mnRelatorio);
 
@@ -151,6 +161,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
        dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void mniRelatorioProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioProfessorActionPerformed
+        RelatorioProfessorDialog dialog = new RelatorioProfessorDialog(this, true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_mniRelatorioProfessorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,6 +211,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar mnbPrincipal;
     private javax.swing.JMenuItem mniAluno;
     private javax.swing.JMenuItem mniRelatorioAluno;
+    private javax.swing.JMenuItem mniRelatorioProfessor;
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JPanel pnl_Base;
     // End of variables declaration//GEN-END:variables

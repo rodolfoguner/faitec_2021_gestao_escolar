@@ -36,8 +36,8 @@ public class ProfessorDialog extends javax.swing.JDialog {
         pnlBotao = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        pnlAlunos = new javax.swing.JPanel();
-        lblAlunos = new javax.swing.JLabel();
+        pnlProfessores = new javax.swing.JPanel();
+        lblProfessores = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,26 +140,26 @@ public class ProfessorDialog extends javax.swing.JDialog {
             }
         });
 
-        pnlAlunos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlProfessores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblAlunos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblAlunos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
-        lblAlunos.setText("Cadastro de Professores");
+        lblProfessores.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        lblProfessores.setText("Cadastro de Professores");
 
-        javax.swing.GroupLayout pnlAlunosLayout = new javax.swing.GroupLayout(pnlAlunos);
-        pnlAlunos.setLayout(pnlAlunosLayout);
-        pnlAlunosLayout.setHorizontalGroup(
-            pnlAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAlunosLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlProfessoresLayout = new javax.swing.GroupLayout(pnlProfessores);
+        pnlProfessores.setLayout(pnlProfessoresLayout);
+        pnlProfessoresLayout.setHorizontalGroup(
+            pnlProfessoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProfessoresLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        pnlAlunosLayout.setVerticalGroup(
-            pnlAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAlunosLayout.createSequentialGroup()
+        pnlProfessoresLayout.setVerticalGroup(
+            pnlProfessoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProfessoresLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -171,7 +171,7 @@ public class ProfessorDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnlBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(pnlAlunos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlProfessores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +187,7 @@ public class ProfessorDialog extends javax.swing.JDialog {
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addComponent(pnlAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
@@ -238,7 +238,7 @@ public class ProfessorDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -287,16 +287,16 @@ public class ProfessorDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JLabel lblAlunos;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JPanel pnlAlunos;
+    private javax.swing.JLabel lblProfessores;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlBotao;
     private javax.swing.JPanel pnlDados;
+    private javax.swing.JPanel pnlProfessores;
     private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JFormattedTextField txtCelular;
     private javax.swing.JTextField txtEmail;

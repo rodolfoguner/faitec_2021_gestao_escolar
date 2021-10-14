@@ -2,6 +2,7 @@ package br.edu.faitec.gestaoescolar.controller;
 
 import br.edu.faitec.gestaoescolar.model.dao.ProfessorDAO;
 import br.edu.faitec.gestaoescolar.model.pojo.Professor;
+import java.util.List;
 
 public class ProfessorController {
     // Inicio do singleton
@@ -30,6 +31,10 @@ public class ProfessorController {
         
         resultado = ProfessorDAO.getInstance().create(professor);
         
-        return true;
+        return resultado;
     } 
+    
+    public List<String> readAll() {
+        return ProfessorDAO.getInstance().read();
+    }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 // Classe que vai conter as instruções para faze o CRUD
 public class ProfessorDAO {
     // Caminho para o arquivo
-    private static final String caminho = ".//Dados//Alunos.txt";
+    private static final String caminho = ".//Dados//Professor.txt";
     
     // Inicio do singleton
     private static ProfessorDAO instance = null;
@@ -36,7 +36,6 @@ public class ProfessorDAO {
         } catch (Exception e) {
             System.out.printf("Não foi possível criar o aluno. %s", e.getMessage());
         }
-        
         return resultado;
     }
     
