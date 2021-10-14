@@ -12,6 +12,9 @@ import java.util.List;
 
 public class AlunoController {
     
+    private AlunoController() {
+    }
+    
     private static AlunoController instance = null;
     
     public static  AlunoController getInstance() {
@@ -20,8 +23,6 @@ public class AlunoController {
         }
         return instance;
     }
-    
-    
     
     // Create do aluno
     public boolean createAluno(String nome, String cpf, String email, 

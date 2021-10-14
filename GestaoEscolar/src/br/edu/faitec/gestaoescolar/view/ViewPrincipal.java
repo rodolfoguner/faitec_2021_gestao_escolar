@@ -27,7 +27,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlBase = new javax.swing.JPanel();
+        pnl_Base = new javax.swing.JPanel();
+        lblImagem = new javax.swing.JLabel();
         mnbPrincipal = new javax.swing.JMenuBar();
         mnCadastro = new javax.swing.JMenu();
         mniAluno = new javax.swing.JMenuItem();
@@ -39,19 +40,25 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
-        pnlBase.setLayout(pnlBaseLayout);
-        pnlBaseLayout.setHorizontalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        lblImagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Gestão escolar.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnl_BaseLayout = new javax.swing.GroupLayout(pnl_Base);
+        pnl_Base.setLayout(pnl_BaseLayout);
+        pnl_BaseLayout.setHorizontalGroup(
+            pnl_BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        pnlBaseLayout.setVerticalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+        pnl_BaseLayout.setVerticalGroup(
+            pnl_BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        mnCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/visitor.png"))); // NOI18N
         mnCadastro.setText("Cadastro");
 
+        mniAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
+        mniAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluna.png"))); // NOI18N
         mniAluno.setText("Cadastro de Aluno");
         mniAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,13 +67,23 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         mnCadastro.add(mniAluno);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
         jMenuItem1.setText("Cadastro Professor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         mnCadastro.add(jMenuItem1);
 
         mnbPrincipal.add(mnCadastro);
 
+        mnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/report_user.png"))); // NOI18N
         mnRelatorio.setText("Relatorio");
 
+        mniRelatorioAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.ALT_MASK));
+        mniRelatorioAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluna.png"))); // NOI18N
         mniRelatorioAluno.setText("Relatorio aluno");
         mniRelatorioAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,8 +94,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         mnbPrincipal.add(mnRelatorio);
 
+        mnAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/information.png"))); // NOI18N
         mnAjuda.setText("Ajuda");
 
+        mniSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.ALT_MASK));
+        mniSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/informacao.png"))); // NOI18N
         mniSobre.setText("Sobre");
         mniSobre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,11 +115,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Base, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -124,6 +144,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }//GEN-LAST:event_mniSobreActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       ProfessorDialog dialog = new ProfessorDialog(this, true);
+       dialog.setLocationRelativeTo(this);
+       dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +188,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lblImagem;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
     private javax.swing.JMenu mnRelatorio;
@@ -169,6 +196,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniAluno;
     private javax.swing.JMenuItem mniRelatorioAluno;
     private javax.swing.JMenuItem mniSobre;
-    private javax.swing.JPanel pnlBase;
+    private javax.swing.JPanel pnl_Base;
     // End of variables declaration//GEN-END:variables
 }
