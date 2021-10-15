@@ -1,12 +1,13 @@
 package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.AlunoController;
+import javax.swing.JOptionPane;
 
 public class AlunoDialog extends javax.swing.JDialog {
-
-    /**
-     * Creates new form AlunoDialog
-     */
+    
+    private static final String MASK_CPF = "   .   .   -  ";
+    private static final String MASK_CELULAR = "(  )      -    ";
+    
     public AlunoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -228,8 +229,8 @@ public class AlunoDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Recebe a confirmação de cadastro
         boolean resultado;
-        
         String nome;
         String cpf;
         String email;
@@ -237,19 +238,71 @@ public class AlunoDialog extends javax.swing.JDialog {
         String endereco;
         String curso;
         String matricula;
-        String data;
         
-        nome = txtNome.getText().trim();
-        cpf = txtCPF.getText().trim();
-        email = txtEmail.getText().trim();
-        celular = txtCelular.getText().trim();
-        endereco = txtEndereco.getText().trim();
-        curso = txtCurso.getText().trim();
-        matricula = txtMatricula.getText().trim();
-        
-        resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
-        
-        System.out.printf("Botão clicado. %s", resultado);
+        if (txtNome.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nome Inválido!");
+            txtNome.requestFocus();
+        } else {
+            nome = txtNome.getText().trim();
+            
+            if (txtCPF.getText().equals(MASK_CPF)) {
+                JOptionPane.showMessageDialog(this, "CPF Inválido");
+                txtCPF.requestFocus();
+            } else {
+                cpf = txtCPF.getText().trim();
+                
+                if (txtEmail.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Email em branco!");
+                    txtEmail.requestFocus();
+                } else {
+                    email = txtEmail.getText().trim();
+                    
+                    if (txtCelular.getText().equals(MASK_CELULAR)) {
+                        JOptionPane.showMessageDialog(this, "Celular em branco!");
+                        txtCelular.requestFocus();
+                    } else {
+                        celular = txtCelular.getText().trim();
+                        
+                        if (txtEndereco.getText().trim().isEmpty()) {
+                            JOptionPane.showMessageDialog(this, "Endereço inválido!");
+                            txtEndereco.requestFocus();
+                        } else {
+                            endereco = txtEndereco.getText().trim();
+                            
+                            if (txtCurso.getText().trim().isEmpty()) {
+                               JOptionPane.showMessageDialog(this, "Curso em branco!");
+                               txtCurso.requestFocus();
+                            } else {
+                                curso = txtCurso.getText().trim();
+                                
+                                if (txtMatricula.getText().trim().isEmpty()) {
+                                    JOptionPane.showMessageDialog(this, "Matrícula em branco!");
+                                    txtMatricula.requestFocus();
+                                } else {
+                                    matricula = txtMatricula.getText().trim();
+                                    
+                                    if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                        resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
+                                        if (resultado) {
+                                            JOptionPane.showMessageDialog(this, "Falha ao salvar Aluno!");
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "Aluno salvo com sucesso!");
+                                            txtNome.setText("");
+                                            txtCPF.setText("");
+                                            txtEmail.setText("");
+                                            txtCelular.setText("");
+                                            txtEndereco.setText("");
+                                            txtCurso.setText("");
+                                            txtMatricula.setText("");                                                                                      
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

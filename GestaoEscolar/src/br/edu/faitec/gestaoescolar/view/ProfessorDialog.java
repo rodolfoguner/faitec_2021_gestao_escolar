@@ -1,6 +1,7 @@
 package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.ProfessorController;
+import javax.swing.JOptionPane;
 
 public class ProfessorDialog extends javax.swing.JDialog {
 
@@ -233,8 +234,11 @@ public class ProfessorDialog extends javax.swing.JDialog {
         endereco = txtEndereco.getText().trim();
 
         resultado = ProfessorController.getInstance().createProfessor(nome, cpf, email, celular, endereco);
-        
-        System.out.printf("Botão clicado. %s", resultado);
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Falha ao salvar o professor!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Professor salvo com sucesso!");
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
