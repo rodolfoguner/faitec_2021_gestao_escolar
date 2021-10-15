@@ -17,4 +17,10 @@ Para fazer download e projeto é necessário ter instalado:
 
 Após instalado é necessário abrir o projeto através do NetBeans e Executar o projeto
 
+Caso ao clicar em salvar um dos cadastro apresente erro, é necessário criar uma pasta com o nome Dados na raiz do projeto GestaoEscolar. Pode ser feito através do comando:
+
+```
+mkdir .\Dados
+```
+
 OBS.: Os cadastros ficam salvos em arquivos, pois o objetivo solicitado pelos professores seria apresentar o domínio da Orientação a Objetos.
