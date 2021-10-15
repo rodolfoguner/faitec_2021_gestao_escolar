@@ -8,7 +8,7 @@ import java.util.ArrayList;
 // Classe que vai conter as instruções para faze o CRUD
 public class ProfessorDAO {
     // Caminho para o arquivo
-    private static final String caminho = ".//Dados//Professor.txt";
+    private static final String caminho = ".//Dados//Professor.dat";
     
     // Inicio do singleton
     private static ProfessorDAO instance = null;

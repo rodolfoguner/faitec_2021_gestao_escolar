@@ -94,6 +94,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         mnRelatorio.add(mniRelatorioAluno);
 
         mniRelatorioProfessor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.ALT_MASK));
+        mniRelatorioProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
         mniRelatorioProfessor.setText("Relatorio professor");
         mniRelatorioProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

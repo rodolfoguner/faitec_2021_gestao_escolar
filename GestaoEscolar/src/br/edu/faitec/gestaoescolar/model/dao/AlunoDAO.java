@@ -13,7 +13,7 @@ import java.util.ArrayList;
 // Classe que vai conter as instruções para faze o CRUD
 public class AlunoDAO {
     // Caminho para o arquivo
-    private static final String caminho = ".//Dados//Alunos.txt";
+    private static final String caminho = ".//Dados//Alunos.dat";
     
     // Inicio do singleton
     private static AlunoDAO instance = null;
