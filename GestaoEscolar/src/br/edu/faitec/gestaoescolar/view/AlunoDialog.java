@@ -2,22 +2,42 @@ package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.AlunoController;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 public class AlunoDialog extends javax.swing.JDialog {
     
     private static final String MASK_CPF = "   .   .   -  ";
     private static final String MASK_CELULAR = "(  )      -    ";
+    private int idAluno = -1;
     
     public AlunoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
     
-    public AlunoDialog(java.awt.Frame parent, boolean modal, String aluno) {
+    public AlunoDialog(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         
-        String[] alunoCampos = aluno.split(",");
+        idAluno = id;
+        
+        this.preencheCampos(idAluno);
+    }
+    
+    private void limpaCampos(){
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtEmail.setText("");
+        txtCelular.setText("");
+        txtEndereco.setText("");
+        txtCurso.setText("");
+        txtMatricula.setText("");         
+    }
+
+    private void preencheCampos(int idAluno){
+        
+        List<String> aluno = AlunoController.getInstance().readAll();
+        String[] alunoCampos = aluno.get(idAluno).split(",");
         
         txtNome.setText(alunoCampos[0]);
         txtCPF.setText(alunoCampos[1]);
@@ -27,7 +47,8 @@ public class AlunoDialog extends javax.swing.JDialog {
         txtCurso.setText(alunoCampos[5]);
         txtMatricula.setText(alunoCampos[6]);
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +77,7 @@ public class AlunoDialog extends javax.swing.JDialog {
         pnlBotao = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         pnlAlunos = new javax.swing.JPanel();
         lblAlunos = new javax.swing.JLabel();
 
@@ -165,6 +187,13 @@ public class AlunoDialog extends javax.swing.JDialog {
             }
         });
 
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBotaoLayout = new javax.swing.GroupLayout(pnlBotao);
         pnlBotao.setLayout(pnlBotaoLayout);
         pnlBotaoLayout.setHorizontalGroup(
@@ -172,15 +201,18 @@ public class AlunoDialog extends javax.swing.JDialog {
             .addGroup(pnlBotaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
         pnlBotaoLayout.setVerticalGroup(
             pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnDeletar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnlAlunos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -253,62 +285,67 @@ public class AlunoDialog extends javax.swing.JDialog {
         String endereco;
         String curso;
         String matricula;
-        
+
         if (txtNome.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nome Inválido!");
             txtNome.requestFocus();
         } else {
             nome = txtNome.getText().trim();
-            
+
             if (txtCPF.getText().equals(MASK_CPF)) {
                 JOptionPane.showMessageDialog(this, "CPF Inválido");
                 txtCPF.requestFocus();
             } else {
                 cpf = txtCPF.getText().trim();
-                
+
                 if (txtEmail.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Email em branco!");
                     txtEmail.requestFocus();
                 } else {
                     email = txtEmail.getText().trim();
-                    
+
                     if (txtCelular.getText().equals(MASK_CELULAR)) {
                         JOptionPane.showMessageDialog(this, "Celular em branco!");
                         txtCelular.requestFocus();
                     } else {
                         celular = txtCelular.getText().trim();
-                        
+
                         if (txtEndereco.getText().trim().isEmpty()) {
                             JOptionPane.showMessageDialog(this, "Endereço inválido!");
                             txtEndereco.requestFocus();
                         } else {
                             endereco = txtEndereco.getText().trim();
-                            
+
                             if (txtCurso.getText().trim().isEmpty()) {
                                JOptionPane.showMessageDialog(this, "Curso em branco!");
                                txtCurso.requestFocus();
                             } else {
                                 curso = txtCurso.getText().trim();
-                                
+
                                 if (txtMatricula.getText().trim().isEmpty()) {
                                     JOptionPane.showMessageDialog(this, "Matrícula em branco!");
                                     txtMatricula.requestFocus();
                                 } else {
                                     matricula = txtMatricula.getText().trim();
-                                    
-                                    if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
-                                        resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
-                                        if (resultado) {
-                                            JOptionPane.showMessageDialog(this, "Falha ao salvar Aluno!");
-                                        } else {
-                                            JOptionPane.showMessageDialog(this, "Aluno salvo com sucesso!");
-                                            txtNome.setText("");
-                                            txtCPF.setText("");
-                                            txtEmail.setText("");
-                                            txtCelular.setText("");
-                                            txtEndereco.setText("");
-                                            txtCurso.setText("");
-                                            txtMatricula.setText("");                                                                                      
+                                    if (idAluno == -1) {
+                                        if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                            resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
+                                            if (resultado) {
+                                                JOptionPane.showMessageDialog(this, "Falha ao salvar Aluno!");
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Aluno salvo com sucesso!");
+                                                this.limpaCampos();
+                                            }
+                                        }
+                                    } else {
+                                        if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                            resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
+                                            if (resultado) {
+                                                JOptionPane.showMessageDialog(this, "Falha ao atualizar dados dos Aluno!");
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Aluno atualizado com sucesso!");
+                                                this.dispose();
+                                            }
                                         }
                                     }
                                 }
@@ -317,12 +354,31 @@ public class AlunoDialog extends javax.swing.JDialog {
                     }
                 }
             }
-        }        
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        if (idAluno == -1) {
+            JOptionPane.showMessageDialog(this, "Esse aluno ainda não foi cadastrado");
+        } else {
+            int opcao;
+            opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cadastro?");
+            if (opcao == JOptionPane.YES_OPTION) {
+                boolean resultado = AlunoController.getInstance().deleteByID(idAluno);
+                if (resultado) {
+                    JOptionPane.showMessageDialog(this, "Não foi possível excluir o aluno");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Aluno excluido com sucesso!");
+                    this.limpaCampos();
+                    this.dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,6 +427,7 @@ public class AlunoDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblAlunos;
     private javax.swing.JLabel lblCPF;

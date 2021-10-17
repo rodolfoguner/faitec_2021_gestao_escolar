@@ -46,4 +46,8 @@ public class AlunoController {
     public List<String> readAll() {
         return AlunoDAO.getInstance().read();
     }
+    
+    public boolean deleteByID (int idSelecionado) {
+        return AlunoDAO.getInstance().deleteById(idSelecionado);
+    }
 }

@@ -61,6 +61,25 @@ public class GerenciadorArquivos{
         
         return listaArquivo;
     }
+    // Abre o arquivo para limpar o que existe e gravar novamente
+    public void limpaArquivo(String caminho) throws IOException{
+        BufferedWriter gravarArquivo = new BufferedWriter(new FileWriter(new File(caminho)));
+        gravarArquivo.close();
+    }
     
-    
+    public boolean deleteByID (String aluno, String caminho) throws IOException{
+        boolean resultado = true;
+        try {
+            BufferedWriter gravarArquivo = new BufferedWriter(new FileWriter(new File(caminho), true));
+            gravarArquivo.write(aluno);
+            gravarArquivo.write(",");
+            gravarArquivo.newLine();
+            gravarArquivo.flush();
+            gravarArquivo.close();
+            resultado = false;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
 }

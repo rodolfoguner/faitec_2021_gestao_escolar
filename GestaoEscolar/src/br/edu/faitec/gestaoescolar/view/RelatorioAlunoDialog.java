@@ -3,6 +3,7 @@ package br.edu.faitec.gestaoescolar.view;
 import br.edu.faitec.gestaoescolar.controller.AlunoController;
 import java.util.List;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class RelatorioAlunoDialog extends javax.swing.JDialog {
@@ -173,13 +174,18 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
-        // Itera em cima da lsita de alunos retornadas do objeto
-        for (int i = 0; i < alunos.size(); i++) {
-            // Separa as informações que vem do arquivo em um array de string
-            String texto [] = alunos.get(i).split(",");
-            // Insere os alunos cadastrados na tabela
-            Object[] linha = {texto[0], texto[3], texto[2]};
-            modeloTabela.addRow(linha);
+        // Verifica se existem alunos cadatrados
+        if (alunos.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Não existem alunos cadastrados");
+        } else {
+            // Itera em cima da lsita de alunos retornadas do objeto
+            for (int i = 0; i < alunos.size(); i++) {
+                // Separa as informações que vem do arquivo em um array de string
+                String texto [] = alunos.get(i).split(",");
+                // Insere os alunos cadastrados na tabela
+                Object[] linha = {texto[0], texto[3], texto[2]};
+                modeloTabela.addRow(linha);
+            }
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -191,9 +197,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         // Metódo para exbir o aluno da linha selecionada
         int linhaSelecionada = tblAlunos.getSelectedRow();
         
-        List<String> alunos = AlunoController.getInstance().readAll();
-        String alunoSelecionado = alunos.get(linhaSelecionada);
-        AlunoDialog alunoDialog = new AlunoDialog((Frame) this.getParent(), true, alunoSelecionado);
+        AlunoDialog alunoDialog = new AlunoDialog((Frame) this.getParent(), true, linhaSelecionada);
 
         alunoDialog.setLocationRelativeTo(this);
         alunoDialog.setVisible(true);

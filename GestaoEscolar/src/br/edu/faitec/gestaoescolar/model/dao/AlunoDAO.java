@@ -41,14 +41,28 @@ public class AlunoDAO {
         try {
             resultado = GerenciadorArquivos.getInstance().salvaArquivo(caminho, listaAlunos);
         } catch (Exception e) {
-            System.out.printf("Não foi possível criar o aluno. %s", e.getMessage());
+            System.out.println("Não foi possível criar o aluno." + e.getMessage());
         }
         
         return resultado;
     }
-    
+    // Lista todos os os cadastros do Aluno
     public List<String> read() {
         return GerenciadorArquivos.getInstance().leArquivo(caminho);
     }
-    
+    // Apaga o aluno selecionado
+    public boolean deleteById(int idSelecionado) {
+        boolean resultado = true;
+        List<String> lista = this.read();
+        lista.remove(idSelecionado);
+        try {
+            GerenciadorArquivos.getInstance().limpaArquivo(caminho);
+            for (String aluno: lista) {
+                resultado = GerenciadorArquivos.getInstance().deleteByID(aluno, caminho);
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível deletar o aluno." + e.getMessage());
+        }
+        return resultado;
+    }
 }
