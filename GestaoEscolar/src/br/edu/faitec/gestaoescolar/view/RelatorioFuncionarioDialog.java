@@ -1,12 +1,13 @@
 package br.edu.faitec.gestaoescolar.view;
 
+import br.edu.faitec.gestaoescolar.controller.FuncionarioController;
 import br.edu.faitec.gestaoescolar.controller.ProfessorController;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class RelatorioProfessorDialog extends javax.swing.JDialog {
+public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
 
-    public RelatorioProfessorDialog(java.awt.Frame parent, boolean modal) {
+    public RelatorioFuncionarioDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -15,14 +16,18 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         pnlBase = new javax.swing.JPanel();
         pnlProfessores = new javax.swing.JPanel();
         lbProfessores = new javax.swing.JLabel();
         scpProfessores = new javax.swing.JScrollPane();
-        tblProfessores = new javax.swing.JTable();
+        tblFuncionarios = new javax.swing.JTable();
         pnlBotao = new javax.swing.JPanel();
         btnConsultar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -30,7 +35,7 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
 
         lbProfessores.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbProfessores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor-no-quadro.png"))); // NOI18N
-        lbProfessores.setText("Professores");
+        lbProfessores.setText("Funcionarios");
 
         javax.swing.GroupLayout pnlProfessoresLayout = new javax.swing.GroupLayout(pnlProfessores);
         pnlProfessores.setLayout(pnlProfessoresLayout);
@@ -38,7 +43,7 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
             pnlProfessoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProfessoresLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(lbProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbProfessores)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlProfessoresLayout.setVerticalGroup(
@@ -49,12 +54,12 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblProfessores.setModel(new javax.swing.table.DefaultTableModel(
+        tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Celular", "Email"
+                "Nome", "Cargo", "Salario"
             }
         ) {
             Class[] types = new Class [] {
@@ -72,7 +77,7 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        scpProfessores.setViewportView(tblProfessores);
+        scpProfessores.setViewportView(tblFuncionarios);
 
         pnlBotao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -152,15 +157,15 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        DefaultTableModel modeloTabela = (DefaultTableModel) tblProfessores.getModel();
-        List<String> professores = ProfessorController.getInstance().readAll();
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblFuncionarios.getModel();
+        List<String> funcionarios = FuncionarioController.getInstance().readAll();
         
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
-        for (int i = 0; i < professores.size(); i++) {
-            String texto [] = professores.get(i).split(",");
-            Object[] linha = {texto[0], texto[3], texto[2]};
+        for (int i = 0; i < funcionarios.size(); i++) {
+            String texto [] = funcionarios.get(i).split(",");
+            Object[] linha = {texto[0], texto[5], texto[6]};
             modeloTabela.addRow(linha);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
@@ -186,21 +191,23 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProfessorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioFuncionarioDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProfessorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioFuncionarioDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProfessorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioFuncionarioDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioProfessorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioFuncionarioDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RelatorioProfessorDialog dialog = new RelatorioProfessorDialog(new javax.swing.JFrame(), true);
+                RelatorioFuncionarioDialog dialog = new RelatorioFuncionarioDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -215,11 +222,12 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel lbProfessores;
     private javax.swing.JPanel pnlBase;
     private javax.swing.JPanel pnlBotao;
     private javax.swing.JPanel pnlProfessores;
     private javax.swing.JScrollPane scpProfessores;
-    private javax.swing.JTable tblProfessores;
+    private javax.swing.JTable tblFuncionarios;
     // End of variables declaration//GEN-END:variables
 }

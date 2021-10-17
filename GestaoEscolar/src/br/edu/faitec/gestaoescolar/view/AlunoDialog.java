@@ -171,7 +171,7 @@ public class AlunoDialog extends javax.swing.JDialog {
         pnlAlunos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblAlunos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblAlunos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        lblAlunos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno-com-limite-de-graduacao.png"))); // NOI18N
         lblAlunos.setText("Cadastro de Alunos");
 
         javax.swing.GroupLayout pnlAlunosLayout = new javax.swing.GroupLayout(pnlAlunos);

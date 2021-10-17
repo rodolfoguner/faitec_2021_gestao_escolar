@@ -40,7 +40,7 @@ public class SobreDialog extends javax.swing.JDialog {
 
         pnlInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
 
-        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/info.png"))); // NOI18N
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/desenvolve.png"))); // NOI18N
 
         lblDesenvolvido.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblDesenvolvido.setText("Desenvolvido por Anilson, Enthony, Rodolfo");

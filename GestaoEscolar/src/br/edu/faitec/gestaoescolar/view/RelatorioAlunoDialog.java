@@ -37,6 +37,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         pnlAlunos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblAlunos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblAlunos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno-com-limite-de-graduacao.png"))); // NOI18N
         lblAlunos.setText("Alunos");
 
         javax.swing.GroupLayout pnlAlunosLayout = new javax.swing.GroupLayout(pnlAlunos);
@@ -44,15 +45,15 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         pnlAlunosLayout.setHorizontalGroup(
             pnlAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAlunosLayout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(lblAlunos)
+                .addGap(124, 124, 124)
+                .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlAlunosLayout.setVerticalGroup(
             pnlAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAlunosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAlunos)
+                .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -83,6 +84,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
 
         pnlBotao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolo-de-pesquisa-de-lupa-em-um-grafico-de-barras.png"))); // NOI18N
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +92,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +118,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
                 .addGroup(pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultar)
                     .addComponent(btnCancelar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);

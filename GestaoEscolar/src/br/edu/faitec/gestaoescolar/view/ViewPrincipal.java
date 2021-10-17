@@ -33,9 +33,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         mnCadastro = new javax.swing.JMenu();
         mniAluno = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnRelatorio = new javax.swing.JMenu();
         mniRelatorioAluno = new javax.swing.JMenuItem();
         mniRelatorioProfessor = new javax.swing.JMenuItem();
+        mniRelatorioFuncionario = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
 
@@ -70,13 +72,22 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
-        jMenuItem1.setText("Cadastro Professor");
+        jMenuItem1.setText("Cadastro de Professor");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         mnCadastro.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionarios.png"))); // NOI18N
+        jMenuItem2.setText("Cadastro de Funcionarios");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnCadastro.add(jMenuItem2);
 
         mnbPrincipal.add(mnCadastro);
 
@@ -85,7 +96,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         mniRelatorioAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.ALT_MASK));
         mniRelatorioAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluna.png"))); // NOI18N
-        mniRelatorioAluno.setText("Relatorio aluno");
+        mniRelatorioAluno.setText("Relatorio de Alunos");
         mniRelatorioAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniRelatorioAlunoActionPerformed(evt);
@@ -95,13 +106,22 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         mniRelatorioProfessor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.ALT_MASK));
         mniRelatorioProfessor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
-        mniRelatorioProfessor.setText("Relatorio professor");
+        mniRelatorioProfessor.setText("Relatorio de Professores");
         mniRelatorioProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniRelatorioProfessorActionPerformed(evt);
             }
         });
         mnRelatorio.add(mniRelatorioProfessor);
+
+        mniRelatorioFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionarios.png"))); // NOI18N
+        mniRelatorioFuncionario.setText("Relatorio de Funcionarios");
+        mniRelatorioFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRelatorioFuncionarioActionPerformed(evt);
+            }
+        });
+        mnRelatorio.add(mniRelatorioFuncionario);
 
         mnbPrincipal.add(mnRelatorio);
 
@@ -168,6 +188,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_mniRelatorioProfessorActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // Instancia a tela do cadastro de alunos
+        FuncionarioDialog dialog = new FuncionarioDialog(this, true);
+        // Torna visível
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mniRelatorioFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelatorioFuncionarioActionPerformed
+        RelatorioFuncionarioDialog dialog = new RelatorioFuncionarioDialog(this,true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_mniRelatorioFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,6 +239,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
@@ -212,6 +247,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar mnbPrincipal;
     private javax.swing.JMenuItem mniAluno;
     private javax.swing.JMenuItem mniRelatorioAluno;
+    private javax.swing.JMenuItem mniRelatorioFuncionario;
     private javax.swing.JMenuItem mniRelatorioProfessor;
     private javax.swing.JMenuItem mniSobre;
     private javax.swing.JPanel pnl_Base;
