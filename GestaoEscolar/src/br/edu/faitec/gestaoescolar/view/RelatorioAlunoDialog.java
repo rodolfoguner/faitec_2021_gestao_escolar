@@ -2,6 +2,7 @@ package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.AlunoController;
 import java.util.List;
+import java.awt.Frame;
 import javax.swing.table.DefaultTableModel;
 
 public class RelatorioAlunoDialog extends javax.swing.JDialog {
@@ -13,7 +14,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +79,11 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlunosMouseClicked(evt);
             }
         });
         scpAlunos.setViewportView(tblAlunos);
@@ -180,6 +186,19 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlunosMouseClicked
+        // Metódo para exbir o aluno da linha selecionada
+        int linhaSelecionada = tblAlunos.getSelectedRow();
+        
+        List<String> alunos = AlunoController.getInstance().readAll();
+        String alunoSelecionado = alunos.get(linhaSelecionada);
+        AlunoDialog alunoDialog = new AlunoDialog((Frame) this.getParent(), true, alunoSelecionado);
+
+        alunoDialog.setLocationRelativeTo(this);
+        alunoDialog.setVisible(true);
+        
+    }//GEN-LAST:event_tblAlunosMouseClicked
 
     /**
      * @param args the command line arguments

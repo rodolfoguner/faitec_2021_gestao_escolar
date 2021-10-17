@@ -12,6 +12,21 @@ public class AlunoDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public AlunoDialog(java.awt.Frame parent, boolean modal, String aluno) {
+        super(parent, modal);
+        initComponents();
+        
+        String[] alunoCampos = aluno.split(",");
+        
+        txtNome.setText(alunoCampos[0]);
+        txtCPF.setText(alunoCampos[1]);
+        txtEmail.setText(alunoCampos[2]);
+        txtCelular.setText(alunoCampos[3]);
+        txtEndereco.setText(alunoCampos[4]);
+        txtCurso.setText(alunoCampos[5]);
+        txtMatricula.setText(alunoCampos[6]);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
