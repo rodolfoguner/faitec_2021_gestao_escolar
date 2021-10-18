@@ -37,4 +37,8 @@ public class ProfessorController {
     public List<String> readAll() {
         return ProfessorDAO.getInstance().read();
     }
+    
+    public boolean deleteByID (int idSelecionado) {
+        return ProfessorDAO.getInstance().deleteById(idSelecionado);
+    }
 }

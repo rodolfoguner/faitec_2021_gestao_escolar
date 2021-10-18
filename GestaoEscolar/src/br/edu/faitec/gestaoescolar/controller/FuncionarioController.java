@@ -46,4 +46,8 @@ public class FuncionarioController {
     public List<String> readAll() {
         return FuncionarioDAO.getInstance().read();
     }
+    
+    public boolean deleteByID (int idSelecionado) {
+        return FuncionarioDAO.getInstance().deleteById(idSelecionado);
+    }
 }

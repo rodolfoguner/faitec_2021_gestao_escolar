@@ -51,4 +51,18 @@ public class FuncionarioDAO {
         return GerenciadorArquivos.getInstance().leArquivo(caminho);
     }
     
+    public boolean deleteById(int idSelecionado) {
+        boolean resultado = true;
+        List<String> lista = this.read();
+        lista.remove(idSelecionado);
+        try {
+            GerenciadorArquivos.getInstance().limpaArquivo(caminho);
+            for (String aluno: lista) {
+                resultado = GerenciadorArquivos.getInstance().deleteByID(aluno, caminho);
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possível deletar o aluno." + e.getMessage());
+        }
+        return resultado;
+    }
 }
