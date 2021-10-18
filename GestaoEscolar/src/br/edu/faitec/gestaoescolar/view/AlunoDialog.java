@@ -338,7 +338,8 @@ public class AlunoDialog extends javax.swing.JDialog {
                                             }
                                         }
                                     } else {
-                                        if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                        if (JOptionPane.showConfirmDialog(this, "Deseja atualizar o cadastro?") == JOptionPane.YES_OPTION) {
+                                            resultado = AlunoController.getInstance().deleteByID(idAluno);
                                             resultado = AlunoController.getInstance().createAluno(nome, cpf, email, celular, endereco, curso, matricula);
                                             if (resultado) {
                                                 JOptionPane.showMessageDialog(this, "Falha ao atualizar dados dos Aluno!");

@@ -16,6 +16,29 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
         initComponents();
     }
     
+    public void preencheTabela () {
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblAlunos.getModel();
+        List<String> alunos = AlunoController.getInstance().readAll();
+        
+        // Inicia tabela sem nenhuma linha
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+        // Verifica se existem alunos cadatrados
+        if (alunos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não existem alunos cadastrados");
+        } else {
+            // Itera em cima da lsita de alunos retornadas do objeto
+            for (int i = 0; i < alunos.size(); i++) {
+                // Separa as informações que vem do arquivo em um array de string
+                String texto [] = alunos.get(i).split(",");
+                // Insere os alunos cadastrados na tabela
+                Object[] linha = {texto[0], texto[3], texto[2]};
+                modeloTabela.addRow(linha);
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,26 +190,7 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        DefaultTableModel modeloTabela = (DefaultTableModel) tblAlunos.getModel();
-        List<String> alunos = AlunoController.getInstance().readAll();
-        
-        // Inicia tabela sem nenhuma linha
-        while (modeloTabela.getRowCount() > 0) {
-            modeloTabela.removeRow(0);
-        }
-        // Verifica se existem alunos cadatrados
-        if (alunos.size() == 0) {
-            JOptionPane.showMessageDialog(this, "Não existem alunos cadastrados");
-        } else {
-            // Itera em cima da lsita de alunos retornadas do objeto
-            for (int i = 0; i < alunos.size(); i++) {
-                // Separa as informações que vem do arquivo em um array de string
-                String texto [] = alunos.get(i).split(",");
-                // Insere os alunos cadastrados na tabela
-                Object[] linha = {texto[0], texto[3], texto[2]};
-                modeloTabela.addRow(linha);
-            }
-        }
+        this.preencheTabela();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -201,6 +205,8 @@ public class RelatorioAlunoDialog extends javax.swing.JDialog {
 
         alunoDialog.setLocationRelativeTo(this);
         alunoDialog.setVisible(true);
+        
+        this.preencheTabela();
         
     }//GEN-LAST:event_tblAlunosMouseClicked
 
