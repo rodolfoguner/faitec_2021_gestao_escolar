@@ -1,7 +1,9 @@
 package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.ProfessorController;
+import java.awt.Frame;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class RelatorioProfessorDialog extends javax.swing.JDialog {
@@ -11,6 +13,25 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
         initComponents();
     }
 
+    private void preencheTabela () {
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblProfessores.getModel();
+        List<String> professores = ProfessorController.getInstance().readAll();
+        
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+        
+        if (professores.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não existem dados cadastrados");
+        } else {
+            for (int i = 0; i < professores.size(); i++) {
+                String texto [] = professores.get(i).split(",");
+                Object[] linha = {texto[0], texto[3], texto[2]};
+                modeloTabela.addRow(linha);
+            }
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,6 +91,11 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProfessoresMouseClicked(evt);
             }
         });
         scpProfessores.setViewportView(tblProfessores);
@@ -152,22 +178,21 @@ public class RelatorioProfessorDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        DefaultTableModel modeloTabela = (DefaultTableModel) tblProfessores.getModel();
-        List<String> professores = ProfessorController.getInstance().readAll();
-        
-        while (modeloTabela.getRowCount() > 0) {
-            modeloTabela.removeRow(0);
-        }
-        for (int i = 0; i < professores.size(); i++) {
-            String texto [] = professores.get(i).split(",");
-            Object[] linha = {texto[0], texto[3], texto[2]};
-            modeloTabela.addRow(linha);
-        }
+        this.preencheTabela();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblProfessoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProfessoresMouseClicked
+        int idSelecionado = tblProfessores.getSelectedRow();
+        
+        ProfessorDialog dialog = new ProfessorDialog((Frame) this.getParent(), true, idSelecionado);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+        this.preencheTabela();
+    }//GEN-LAST:event_tblProfessoresMouseClicked
 
     /**
      * @param args the command line arguments

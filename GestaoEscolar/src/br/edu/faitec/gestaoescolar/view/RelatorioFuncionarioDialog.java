@@ -3,6 +3,7 @@ package br.edu.faitec.gestaoescolar.view;
 import br.edu.faitec.gestaoescolar.controller.FuncionarioController;
 import java.awt.Frame;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
@@ -19,10 +20,15 @@ public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
         while (modeloTabela.getRowCount() > 0) {
             modeloTabela.removeRow(0);
         }
-        for (int i = 0; i < funcionarios.size(); i++) {
-            String texto [] = funcionarios.get(i).split(",");
-            Object[] linha = {texto[0], texto[5], texto[6]};
-            modeloTabela.addRow(linha);
+        
+        if (funcionarios.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não existem funcionários cadastrados");
+        } else {
+            for (int i = 0; i < funcionarios.size(); i++) {
+                String texto [] = funcionarios.get(i).split(",");
+                Object[] linha = {texto[0], texto[5], texto[6]};
+                modeloTabela.addRow(linha);
+            }
         }
     }
 

@@ -2,15 +2,44 @@ package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.ProfessorController;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 public class ProfessorDialog extends javax.swing.JDialog {
     
     private static final String MASK_CPF = "   .   .   -  ";
     private static final String MASK_CELULAR = "(  )      -    ";
+    private int idProfessor = -1;
     
     public ProfessorDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public ProfessorDialog(java.awt.Frame parent, boolean modal, int idProfessor) {
+        super(parent, modal);
+        initComponents();
+        
+        this.idProfessor = idProfessor;
+        
+        this.preencheCampos(this.idProfessor);
+    }
+    
+    private void preencheCampos (int idProfessor) {
+        List<String> lista = ProfessorController.getInstance().readAll();
+        String[] campos = lista.get(idProfessor).split(",");
+        txtNome.setText(campos[0]);
+        txtCPF.setText(campos[1]);
+        txtEmail.setText(campos[2]);
+        txtCelular.setText(campos[3]);
+        txtCursoMinistrado.setText(campos[4]);
+    }
+    
+    private void limpaCampos() {
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtEmail.setText("");
+        txtCelular.setText("");
+        txtCursoMinistrado.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -30,8 +59,9 @@ public class ProfessorDialog extends javax.swing.JDialog {
         txtCPF = new javax.swing.JFormattedTextField();
         txtCelular = new javax.swing.JFormattedTextField();
         pnlBotao = new javax.swing.JPanel();
-        btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         pnlProfessores = new javax.swing.JPanel();
         lblProfessores = new javax.swing.JLabel();
 
@@ -109,16 +139,13 @@ public class ProfessorDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlBotaoLayout = new javax.swing.GroupLayout(pnlBotao);
-        pnlBotao.setLayout(pnlBotaoLayout);
-        pnlBotaoLayout.setHorizontalGroup(
-            pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pnlBotaoLayout.setVerticalGroup(
-            pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 33, Short.MAX_VALUE)
-        );
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel.png"))); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/save.png"))); // NOI18N
         btnSalvar.setText("Salvar");
@@ -128,13 +155,36 @@ public class ProfessorDialog extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnDeletarActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout pnlBotaoLayout = new javax.swing.GroupLayout(pnlBotao);
+        pnlBotao.setLayout(pnlBotaoLayout);
+        pnlBotaoLayout.setHorizontalGroup(
+            pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlBotaoLayout.setVerticalGroup(
+            pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotaoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeletar)))
+        );
 
         pnlProfessores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -147,7 +197,7 @@ public class ProfessorDialog extends javax.swing.JDialog {
         pnlProfessoresLayout.setHorizontalGroup(
             pnlProfessoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProfessoresLayout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -160,22 +210,13 @@ public class ProfessorDialog extends javax.swing.JDialog {
         pnlBase.setLayout(pnlBaseLayout);
         pnlBaseLayout.setHorizontalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(pnlProfessores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(pnlDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))))
+                    .addComponent(pnlDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,18 +225,17 @@ public class ProfessorDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(pnlDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelar))
-                .addGap(18, 18, 18)
-                .addComponent(pnlBotao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlBotao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,20 +285,25 @@ public class ProfessorDialog extends javax.swing.JDialog {
                             txtCursoMinistrado.requestFocus();
                         } else {
                             Curso_ministrado = txtCursoMinistrado.getText().trim();
-                            
-
-                            if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                            if (this.idProfessor == - 1) {
+                                if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                    resultado = ProfessorController.getInstance().createProfessor(nome, cpf, email, celular, Curso_ministrado);
+                                    if (resultado) {
+                                        JOptionPane.showMessageDialog(this, "Falha ao salvar Professor!");
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Professor salvo com sucesso!");
+                                        this.limpaCampos();
+                                    }      
+                                }
+                            } else {
+                                resultado = ProfessorController.getInstance().deleteByID(this.idProfessor);
                                 resultado = ProfessorController.getInstance().createProfessor(nome, cpf, email, celular, Curso_ministrado);
                                 if (resultado) {
-                                    JOptionPane.showMessageDialog(this, "Falha ao salvar Aluno!");
+                                    JOptionPane.showMessageDialog(this, "Falha ao atualizar o Professor!");
                                 } else {
-                                    JOptionPane.showMessageDialog(this, "Professor salvo com sucesso!");
-                                    txtNome.setText("");
-                                    txtCPF.setText("");
-                                    txtEmail.setText("");
-                                    txtCelular.setText("");
-                                    txtCursoMinistrado.setText("");                                                                                     
-                                }      
+                                    JOptionPane.showMessageDialog(this, "Professor atualizado com sucesso!");
+                                    this.dispose();
+                                }   
                             }
                         }
                     }
@@ -270,6 +315,22 @@ public class ProfessorDialog extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        if (this.idProfessor == -1) {
+            JOptionPane.showMessageDialog(this, "Professor ainda não criado!");
+        } else {
+            if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cadastro?") == JOptionPane.YES_OPTION) {
+                boolean resultado = ProfessorController.getInstance().deleteByID(this.idProfessor);
+                if (resultado) {
+                    JOptionPane.showMessageDialog(this, "Não foi possível excluir o cadastro");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cadastro deletado com sucesso");
+                    this.dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,6 +377,7 @@ public class ProfessorDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCelular;
