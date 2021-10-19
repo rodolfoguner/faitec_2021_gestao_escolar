@@ -1,7 +1,7 @@
 package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.FuncionarioController;
-import br.edu.faitec.gestaoescolar.controller.ProfessorController;
+import java.awt.Frame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -10,6 +10,20 @@ public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
     public RelatorioFuncionarioDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    private void preencheTabela () {
+        DefaultTableModel modeloTabela = (DefaultTableModel) tblFuncionarios.getModel();
+        List<String> funcionarios = FuncionarioController.getInstance().readAll();
+        
+        while (modeloTabela.getRowCount() > 0) {
+            modeloTabela.removeRow(0);
+        }
+        for (int i = 0; i < funcionarios.size(); i++) {
+            String texto [] = funcionarios.get(i).split(",");
+            Object[] linha = {texto[0], texto[5], texto[6]};
+            modeloTabela.addRow(linha);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -75,6 +89,11 @@ public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFuncionariosMouseClicked(evt);
             }
         });
         scpProfessores.setViewportView(tblFuncionarios);
@@ -157,22 +176,23 @@ public class RelatorioFuncionarioDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        DefaultTableModel modeloTabela = (DefaultTableModel) tblFuncionarios.getModel();
-        List<String> funcionarios = FuncionarioController.getInstance().readAll();
-        
-        while (modeloTabela.getRowCount() > 0) {
-            modeloTabela.removeRow(0);
-        }
-        for (int i = 0; i < funcionarios.size(); i++) {
-            String texto [] = funcionarios.get(i).split(",");
-            Object[] linha = {texto[0], texto[5], texto[6]};
-            modeloTabela.addRow(linha);
-        }
+        this.preencheTabela();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionariosMouseClicked
+        int linhaSelecionada = tblFuncionarios.getSelectedRow();
+        
+        FuncionarioDialog funcionarioDialog = new FuncionarioDialog((Frame) this.getParent(), true, linhaSelecionada);
+
+        funcionarioDialog.setLocationRelativeTo(this);
+        funcionarioDialog.setVisible(true);
+        
+        this.preencheTabela();
+    }//GEN-LAST:event_tblFuncionariosMouseClicked
 
     /**
      * @param args the command line arguments

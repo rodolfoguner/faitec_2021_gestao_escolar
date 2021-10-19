@@ -2,15 +2,48 @@ package br.edu.faitec.gestaoescolar.view;
 
 import br.edu.faitec.gestaoescolar.controller.FuncionarioController;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 public class FuncionarioDialog extends javax.swing.JDialog {
     
     private static final String MASK_CPF = "   .   .   -  ";
     private static final String MASK_CELULAR = "(  )      -    ";
+    private int idFuncionario = - 1;
     
     public FuncionarioDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }    
+    public FuncionarioDialog(java.awt.Frame parent, boolean modal, int idFuncionario) {
+        super(parent, modal);
+        initComponents();
+        
+        this.idFuncionario = idFuncionario;
+        
+        this.preencheCampos(this.idFuncionario);
+    }
+    
+    private void limpaCampos () {
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtEmail.setText("");
+        txtCelular.setText("");
+        txtEndereco.setText("");
+        txtCargo.setText("");
+        txtSalario.setText("");
+    }
+    
+    private void preencheCampos (int idFuncionario) {
+        List<String> funcionario = FuncionarioController.getInstance().readAll();
+        String[] funcionarioCampos = funcionario.get(idFuncionario).split(",");
+        
+        txtNome.setText(funcionarioCampos[0]);
+        txtCPF.setText(funcionarioCampos[1]);
+        txtEmail.setText(funcionarioCampos[2]);
+        txtCelular.setText(funcionarioCampos[3]);
+        txtEndereco.setText(funcionarioCampos[4]);
+        txtCargo.setText(funcionarioCampos[5]);
+        txtSalario.setText(funcionarioCampos[6]);
     }
 
     /**
@@ -22,6 +55,7 @@ public class FuncionarioDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlBase = new javax.swing.JPanel();
         pnlDados = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
@@ -41,6 +75,7 @@ public class FuncionarioDialog extends javax.swing.JDialog {
         pnlBotao = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         pnlFuncionario = new javax.swing.JPanel();
         lblFuncionario = new javax.swing.JLabel();
 
@@ -156,6 +191,14 @@ public class FuncionarioDialog extends javax.swing.JDialog {
             }
         });
 
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBotaoLayout = new javax.swing.GroupLayout(pnlBotao);
         pnlBotao.setLayout(pnlBotaoLayout);
         pnlBotaoLayout.setHorizontalGroup(
@@ -163,7 +206,9 @@ public class FuncionarioDialog extends javax.swing.JDialog {
             .addGroup(pnlBotaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addComponent(btnDeletar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -171,7 +216,8 @@ public class FuncionarioDialog extends javax.swing.JDialog {
             pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeletar))
         );
 
         pnlFuncionario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -286,20 +332,26 @@ public class FuncionarioDialog extends javax.swing.JDialog {
                                     txtSalario.requestFocus();
                                 } else {
                                     salario = txtSalario.getText().trim();
-                                    
-                                    if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
-                                        resultado = FuncionarioController.getInstance().createFuncionario(nome, cpf, email, celular, endereco, cargo, salario);
-                                        if (resultado) {
-                                            JOptionPane.showMessageDialog(this, "Falha ao salvar Funcionario!");
-                                        } else {
-                                            JOptionPane.showMessageDialog(this, "Funcionario salvo com sucesso!");
-                                            txtNome.setText("");
-                                            txtCPF.setText("");
-                                            txtEmail.setText("");
-                                            txtCelular.setText("");
-                                            txtEndereco.setText("");
-                                            txtCargo.setText("");
-                                            txtSalario.setText("");                                                                                      
+                                    if (idFuncionario == - 1) {
+                                        if (JOptionPane.showConfirmDialog(this, "Deseja salvar o cadastro?") == JOptionPane.YES_OPTION) {
+                                            resultado = FuncionarioController.getInstance().createFuncionario(nome, cpf, email, celular, endereco, cargo, salario);
+                                            if (resultado) {
+                                                JOptionPane.showMessageDialog(this, "Falha ao salvar Funcionario!");
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Funcionario salvo com sucesso!");
+                                                this.limpaCampos();                                       
+                                            }
+                                        }
+                                    } else {
+                                        if (JOptionPane.showConfirmDialog(this, "Deseja atualizar o cadastro?") == JOptionPane.YES_OPTION) {
+                                            resultado = FuncionarioController.getInstance().deleteByID(idFuncionario);
+                                            resultado = FuncionarioController.getInstance().createFuncionario(nome, cpf, email, celular, endereco, cargo, salario);
+                                            if (resultado) {
+                                                JOptionPane.showMessageDialog(this, "Falha ao atualizar o Funcionario!");
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Funcionario atualizado com sucesso!");
+                                                this.dispose();
+                                            }
                                         }
                                     }
                                 }
@@ -318,6 +370,25 @@ public class FuncionarioDialog extends javax.swing.JDialog {
     private void txtCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCargoActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        if (idFuncionario == -1) {
+            JOptionPane.showMessageDialog(this, "Esse funcionario ainda não foi cadastrado");
+        } else {
+            int opcao;
+            opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cadastro?");
+            if (opcao == JOptionPane.YES_OPTION) {
+                boolean resultado = FuncionarioController.getInstance().deleteByID(idFuncionario);
+                if (resultado) {
+                    JOptionPane.showMessageDialog(this, "Não foi possível excluir o funcionario.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Funcionario excluido com sucesso!");
+                    this.limpaCampos();
+                    this.dispose();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,7 +441,9 @@ public class FuncionarioDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCargo;
     private javax.swing.JLabel lblCelular;
