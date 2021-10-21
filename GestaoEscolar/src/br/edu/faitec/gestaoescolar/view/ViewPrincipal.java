@@ -38,6 +38,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         mniRelatorioAluno = new javax.swing.JMenuItem();
         mniRelatorioProfessor = new javax.swing.JMenuItem();
         mniRelatorioFuncionario = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         mnAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
 
@@ -93,6 +94,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         mnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/report_user.png"))); // NOI18N
         mnRelatorio.setText("Relatorio");
+        mnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioActionPerformed(evt);
+            }
+        });
 
         mniRelatorioAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.ALT_MASK));
         mniRelatorioAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluna.png"))); // NOI18N
@@ -114,6 +120,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         mnRelatorio.add(mniRelatorioProfessor);
 
+        mniRelatorioFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         mniRelatorioFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionarios.png"))); // NOI18N
         mniRelatorioFuncionario.setText("Relatorio de Funcionarios");
         mniRelatorioFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +129,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
         mnRelatorio.add(mniRelatorioFuncionario);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Financeiro.png"))); // NOI18N
+        jMenuItem3.setText("Relatorio Finançeiro");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnRelatorio.add(jMenuItem3);
 
         mnbPrincipal.add(mnRelatorio);
 
@@ -202,6 +219,14 @@ public class ViewPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_mniRelatorioFuncionarioActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void mnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioActionPerformed
+      
+    }//GEN-LAST:event_mnRelatorioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +265,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
