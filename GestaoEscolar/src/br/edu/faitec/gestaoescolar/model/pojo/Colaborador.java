@@ -5,7 +5,7 @@ package br.edu.faitec.gestaoescolar.model.pojo;
  * pelas outras classes filho.
  */
 
-public abstract class Usuario {
+public abstract class Colaborador {
     // Criando uma classe base que tera os atributos de todos usuarios
     private String nome;
     private String cpf;

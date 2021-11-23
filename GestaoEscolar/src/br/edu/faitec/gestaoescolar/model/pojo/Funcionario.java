@@ -9,7 +9,7 @@ package br.edu.faitec.gestaoescolar.model.pojo;
  *
  * @author Anils
  */
-public class Funcionario extends Usuario{
+public class Funcionario extends Colaborador{
    private String salario;
    private String cargo;
 
